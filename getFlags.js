@@ -12,11 +12,16 @@ const trs = getChildren(tbody)
   .filter(getElementsByName('tr'))
 
 const tds = trs.map(getChildren)
-  .map(trChildren => trChildren.filter(getElementsByName('td'))[2])
+  .map(trChildren => trChildren.filter(getElementsByName('td')))
 
-const getImgFromTd = ts =>
-  R.path([])
+const getImgSrc = R.path(['2', 'children', '0', 'children', '0', 'attribs', 'src'])
+const getWikiLink = R.path(['1', 'children', '2', 'children', '0', 'attribs', 'href'])
+const result = tds.map(d => ({
+  wiki:getWikiLink(d),
+  img: getImgSrc(d)
+}))
 
-
-
-console.log(tds)
+fs.writeFileSync(
+  'liens_drapeaux.json',
+  JSON.stringify(result, null, 2),
+  'utf-8')
