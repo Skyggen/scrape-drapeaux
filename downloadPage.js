@@ -4,6 +4,6 @@ const fs = require('fs')
 const URL = 'https://fr.wikipedia.org/wiki/Armorial_de_la_Suisse'
 const save = fileName => txt => fs.writeFileSync(fileName, txt, 'utf-8')
 
-fetch(URL)
+fetch('https://fr.wikipedia.org/wiki/Canton_(Suisse)')
   .then(r => r.text())
-  .then(save('Armorial_de_la_Suisse.html'))
+  .then(save('x.html'))
